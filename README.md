@@ -14,5 +14,3 @@ Once you've made your working copy of the site repo, from the repo root folder, 
 ```bash
 hugo server
 ```
-
-
