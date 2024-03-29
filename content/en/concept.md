@@ -163,6 +163,4 @@ roles:
 
 ## {{% heading "nextSteps" %}}
 
-After you define your roles, you use the CLI to [add your roles]({{< ref "iam/manage-rbac-roles" >}}) to your CD-as-a-Service organization. You do all subsequent role management with the CLI, but you [assign roles to users]({{< ref "iam/manage-users" >}}) using the UI.
-
-All users must have at least one role to use CD-as-a-Service. You can assign the Organization Admin role or a custom role. If a user has login credentials but no role assigned, the user sees a blank **Deployments** screen after logging in.
+Use the CLI to [add your roles]({{< ref "iam/manage-rbac-roles" >}}) to your CD-as-a-Service organization. You do all subsequent role management with the CLI, but you [assign roles to users]({{< ref "iam/manage-users" >}}) using the UI.
