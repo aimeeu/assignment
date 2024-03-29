@@ -1,184 +1,150 @@
-# Docsy Example
+# Overview
 
-[Docsy][] is a [Hugo theme module][] for technical documentation sites, providing easy
-site navigation, structure, and more. This **Docsy Example Project** uses the Docsy
-theme component as a hugo module and provides a skeleton documentation structure for you to use.
-You can clone/copy this project and edit it with your own content, or use it as an example.
+This is the repo for Armory CD-as-a-Service documentation. We welcome contributions from people outside of Armory.
 
-In this project, the Docsy theme is pulled in as a Hugo module, together with
-its dependencies:
+The site is hosted by [Netlify](https://www.netlify.com/), which generates a preview build for every pull request. Install the extended version of [Hugo](https://gohugo.io/) (`brew install hugo`) if you want to compile and run the project locally. The Hugo extended version (currently 0.110.10) is specified in both `config.yaml` and `netlify.toml`. CD-as-a-Service docs uses the [Docsy](https://docsy.dev) theme as a Go module. If you want to build locally, you should make sure your workstation has the required software installed. https://www.docsy.dev/docs/get-started/docsy-as-module/installation-prerequisites/
 
-```console
-$ hugo mod graph
-...
-```
+The latest version of the docs is the `master` branch.
 
-For Docsy documentation, see [Docsy user guide][].
+The site has built-in support for [Mermaid](https://mermaid-js.github.io/mermaid/), which is a Javascript based diagramming and charting tool that uses Markdown-inspired text definitions and a renderer to create and modify complex diagrams. <i>Diagramming and documentation costs precious developer time and gets outdated quickly. But not having diagrams or docs ruins productivity and hurts organizational learning. Mermaid addresses this problem by cutting the time, effort and tooling that is required to create modifiable diagrams and charts, for smarter and more reusable content. The text definitions for Mermaid diagrams allows for it to be updated easily, it can also be made part of production scripts (and other pieces of code). So less time needs to be spent on documenting, as a separate and laborious task. Even non-programmers can create diagrams through the Mermaid Live Editor.</i>
 
-This Docsy Example Project is hosted on [Netlify][] at [example.docsy.dev][].
-You can view deploy logs from the [deploy section of the project's Netlify
-dashboard][deploys], or this [alternate dashboard][].
+Mermaid resources:
+- [Quick Start](http://mermaid.js.org/intro/getting-started.html)
+- [Tutorials](hhttp://mermaid.js.org/config/Tutorials.html)
+- [Mermaid Live Editor](https://mermaid-js.github.io/mermaid-live-editor/) - create your diagrams visually and copy the generated Mermaid code to your page
 
-This is not an officially supported Google product. This project is currently maintained.
+The theme also supports PlantUML and draw.io.
 
-## Using the Docsy Example Project as a template
+## Cloning the project
 
-A simple way to get started is to use this project as a template, which gives you a site project that is set up and ready to use. To do this:
+[Contributor's Guide](https://docs.armory.io/contribute)
 
-1. Use the dropdown for switching branches/tags to change to the **latest** released tag.
+People who are not part of the Armory organization need to create a fork of this repo. See the GitHub.com help [docs](https://help.github.com/en/github/collaborating-with-issues-and-pull-requests/about-forks) for how to fork a repo.
 
-2. Click **Use this template**.
-
-3. Select a name for your new project and click **Create repository from template**.
-
-4. Make your own local working copy of your new repo using git clone, replacing https://github.com/me/example.git with your repo’s web URL:
+Clone your forked repo:
 
 ```bash
-git clone --depth 1 https://github.com/me/example.git
+git clone git@github.com:<github-username>/docs-cdaas.git
 ```
 
-You can now edit your own versions of the site’s source files.
-
-If you want to do SCSS edits and want to publish these, you need to install `PostCSS`
+Set this docs repo as the upstream remote:
 
 ```bash
-npm install
+git remote add upstream https://github.com/armory/docs-cdaas.git
 ```
 
-## Running the website locally
-
-Building and running the site locally requires a recent `extended` version of [Hugo](https://gohugo.io).
-You can find out more about how to install Hugo for your environment in our
-[Getting started](https://www.docsy.dev/docs/getting-started/#prerequisites-and-installation) guide.
-
-Once you've made your working copy of the site repo, from the repo root folder, run:
+Confirm your origin and upstream repositories:
 
 ```bash
+git remote -v
+```
+
+Output is similar to:
+
+```bash
+origin	git@github.com:<github-username>/docs-cdaas.git (fetch)
+origin	git@github.com:<github-username>/docs-cdaas.git (push)
+upstream	https://github.com/armory/docs-cdaas.git (fetch)
+upstream	https://github.com/armory/docs-cdaas.git (push)
+```
+
+## Update your local repository
+
+Make sure your local repository is current before you start making changes. Fetch commits from your fork's `origin/master` and `upstream/master`:
+
+   ```bash
+   git fetch origin
+   git fetch upstream
+   ```
+
+## Create a working branch
+
+Make sure you are in your `master` branch before you create your working
+branch. You can use `git branch` to see which branch you are in.
+
+```bash
+git branch
+```
+
+The output lists your local branches. There is an `*` next to the branch you are in.
+
+```bash
+working-branch-1
+working-branch-2
+* master
+```
+
+If you are not in `master`, execute `git checkout master` to go to your `master` branch. See the [Understanding history: What is a branch?](https://git-scm.com/docs/user-manual#what-is-a-branch) section of the _Git User Manual_ for more information.
+
+Create a new working branch based on `upstream/master`.
+
+```bash
+git checkout -b <your-working-branch> upstream/master
+```
+
+Since `git` tracks changes to `upstream\master`, you don't need to rebase your fork before you create a working branch.
+
+Content is in `content/en/docs`. Make your changes to the desired file.
+
+Use the `git status` command at any time to see what files you've changed.
+
+If you have installed [Hugo](https://gohugo.io/getting-started/installing/) and want to preview your changes locally, run from the repo root:
+
+```
 hugo server
 ```
 
-## Running a container locally
+## Commit your changes
 
-You can run docsy-example inside a [Docker](https://docs.docker.com/)
-container, the container runs with a volume bound to the `docsy-example`
-folder. This approach doesn't require you to install any dependencies other
-than [Docker Desktop](https://www.docker.com/products/docker-desktop) on
-Windows and Mac, and [Docker Compose](https://docs.docker.com/compose/install/)
-on Linux.
-
-1. Build the docker image
-
-   ```bash
-   docker-compose build
-   ```
-
-1. Run the built image
-
-   ```bash
-   docker-compose up
-   ```
-
-   > NOTE: You can run both commands at once with `docker-compose up --build`.
-
-1. Verify that the service is working.
-
-   Open your web browser and type `http://localhost:1313` in your navigation bar,
-   This opens a local instance of the docsy-example homepage. You can now make
-   changes to the docsy example and those changes will immediately show up in your
-   browser after you save.
-
-### Cleanup
-
-To stop Docker Compose, on your terminal window, press **Ctrl + C**.
-
-To remove the produced images run:
+Check which files you need to commit:
 
 ```bash
-docker-compose rm
-```
-For more information see the [Docker Compose documentation][].
-
-## Using a local Docsy clone
-
-Make sure your installed go version is `1.18` or higher.
-
-Clone the latest version of the docsy theme into the parent folder of your project. The newly created repo should now reside in a sibling folder of your site's root folder.
-
-```shell
-cd root-of-your-site
-git clone --branch v0.7.2 https://github.com/google/docsy.git ../docsy
+git status
 ```
 
-Now run:
+Output is similar to:
 
-```shell
-HUGO_MODULE_WORKSPACE=docsy.work hugo server --ignoreVendorPaths "**"
+```bash
+On branch <your-working-branch>
+Changes not staged for commit:
+(use "git add <file>..." to update what will be committed)
+(use "git restore <file>..." to discard changes in working directory)
+
+modified:   content/en/docs/spinnaker/armory-halyard.md
+
+no changes added to commit (use "git add" and/or "git commit -a")
 ```
 
-or, when using npm, prepend `local` to the script you want to invoke, e.g.:
+Create a commit:
 
-```shell
-npm run local serve
+```bash
+git commit -a -m "<your-commit-subject>" -m "<your-commit-description>"
 ```
 
-By using the `HUGO_MODULE_WORKSPACE` directive (either directly or via prefix `local` when using npm), the server now watches all files and directories inside the sibling directory `../docsy` , too. Any changes inside the local `docsy` theme clone are  now immediately picked up (hot reload), you can instantly see the effect of your local edits.
+- `-a`: Commit all staged changes.
+- `-m`: Use the given `<your-commit-subject>` as the commit message. If multiple `-m` options are given, their values are concatenated as separate paragraphs.
 
-In the command above, we used the environment variable `HUGO_MODULE_WORKSPACE` to tell hugo about the local workspace file `docsy.work`. Alternatively, you can declare the workspace file inside your settings file `hugo.toml`:
+Your commit messages must be 50 characters or less. Do not use any [GitHub
+Keywords](https://help.github.com/en/github/managing-your-work-on-github/linking-a-pull-request-to-an-issue#linking-a-pull-request-to-an-issue-using-a-keyword) in your commit message. You can add those to the pull request description later.
 
-```toml
-[module]
-  workspace = "docsy.work"
+Push your working branch and its new commit to your remote fork:
+
+```bash
+git push origin <your-working-branch>
 ```
 
-Your project's `hugo.toml` file already contains these lines, the directive for workspace assignment is commented out, however. Remove the two trailing comment characters '//' so that this line takes effect.
+You can commit and push many times before you create your PR.
 
-## Troubleshooting
+## Create your pull request
 
-As you run the website locally, you may run into the following error:
+See the GitHub [docs](https://help.github.com/en/github/collaborating-with-issues-and-pull-requests/creating-a-pull-request-from-a-fork) for how to create a pull request from a fork.
 
-```console
-$ hugo server
-WARN 2023/06/27 16:59:06 Module "project" is not compatible with this Hugo version; run "hugo mod graph" for more information.
-Start building sites …
-hugo v0.101.0-466fa43c16709b4483689930a4f9ac8add5c9f66+extended windows/amd64 BuildDate=2022-06-16T07:09:16Z VendorInfo=gohugoio
-Error: Error building site: "C:\Users\foo\path\to\docsy-example\content\en\_index.md:5:1": failed to extract shortcode: template for shortcode "blocks/cover" not found
-Built in 27 ms
-```
+**On user-owned forks, select _Allow edits from maintainers_ so maintainers can make changes to your pull request,**
 
-This error occurs if you are running an outdated version of Hugo. As of docsy theme version `v0.7.0`, hugo version `0.110.0` or higher is required.
-See this [section](https://www.docsy.dev/docs/get-started/docsy-as-module/installation-prerequisites/#install-hugo) of the user guide for instructions on how to install Hugo.
+## Monitoring
 
-Or you may be confronted with the following error:
+The Armory documentation uses New Relic to monitor the website status and other metrics.
 
-```console
-$ hugo server
+## Link checks
 
-INFO 2021/01/21 21:07:55 Using config file:
-Building sites … INFO 2021/01/21 21:07:55 syncing static files to /
-Built in 288 ms
-Error: Error building site: TOCSS: failed to transform "scss/main.scss" (text/x-scss): resource "scss/scss/main.scss_9fadf33d895a46083cdd64396b57ef68" not found in file cache
-```
-
-This error occurs if you have not installed the extended version of Hugo.
-See this [section](https://www.docsy.dev/docs/get-started/docsy-as-module/installation-prerequisites/#install-hugo) of the user guide for instructions on how to install Hugo.
-
-Or you may encounter the following error:
-
-```console
-$ hugo server
-
-Error: failed to download modules: binary with name "go" not found
-```
-
-This error occurs if you have not installed the `go` programming language on your system.
-See this [section](https://www.docsy.dev/docs/get-started/docsy-as-module/installation-prerequisites/#install-go-language) of the user guide for instructions on how to install `go`.
-
-
-[alternate dashboard]: https://app.netlify.com/sites/goldydocs/deploys
-[deploys]: https://app.netlify.com/sites/docsy-example/deploys
-[Docsy user guide]: https://docsy.dev/docs
-[Docsy]: https://github.com/google/docsy
-[example.docsy.dev]: https://example.docsy.dev
-[Hugo theme module]: https://gohugo.io/hugo-modules/use-modules/#use-a-module-for-a-theme
-[Netlify]: https://netlify.com
-[Docker Compose documentation]: https://docs.docker.com/compose/gettingstarted/
+The repo uses [Markdown link check](https://github.com/marketplace/actions/markdown-link-check) to check static links in a PR.  

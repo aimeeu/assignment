@@ -1,0 +1,76 @@
+# common headings
+[heading_prereq]
+other = "Before you begin"
+[heading_installOperator]
+other = "Install the Operator"
+[heading_nextSteps]
+other = "What's next"
+
+# UI strings. Buttons and similar.
+
+[ui_pager_prev]
+other = "Previous"
+
+[ui_pager_next]
+other = "Next"
+
+[ui_read_more]
+other = "Read more"
+
+[ui_search]
+other = "Search this site…"
+
+# Used in sentences such as "Posted in News"
+[ui_in]
+other = "in"
+
+# Footer text
+[footer_all_rights_reserved]
+other = "All Rights Reserved."
+
+[footer_privacy_policy]
+other = "Privacy Policy"
+
+[footer_terms_of_service]
+other = "Terms of Service"
+
+[footer_terms_and_conditions]
+other = "Terms & Conditions"
+
+# Post (blog, articles etc.)
+[post_byline_by]
+other = "By"
+[post_created]
+other = "Created"
+[post_last_mod]
+other = "Last modified"
+[post_edit_this]
+other = "Edit this page"
+[post_create_issue]
+other = "Create docs issue"
+[post_create_project_issue]
+other = "Create project issue"
+[post_posts_in]
+other = "Posts in"
+
+# Glossary
+[layouts_docs_glossary_aka]
+other = "Also known as"
+
+[layouts_docs_glossary_description]
+other = "This glossary is intended to be a comprehensive, standardized list of Kubernetes terminology. It includes technical terms that are specific to Kubernetes, as well as more general terms that provide useful context."
+
+[layouts_docs_glossary_deselect_all]
+other = "Deselect all"
+
+[layouts_docs_glossary_click_details_after]
+other = "indicators below to get a longer explanation for any particular term."
+
+[layouts_docs_glossary_click_details_before]
+other = "Click on the"
+
+[layouts_docs_glossary_filter]
+other = "Filter terms according to their tags"
+
+[layouts_docs_glossary_select_all]
+other = "Select all"

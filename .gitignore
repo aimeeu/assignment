@@ -1,5 +1,15 @@
-/public
+.idea
+public/
 resources/
 node_modules/
-package-lock.json
+tmp/
+dist/
+tech-doc-hugo
+.DS_Store
+utils/vendor/
+.vscode/
+.env
+# Local Netlify folder
+.netlify
 .hugo_build.lock
+

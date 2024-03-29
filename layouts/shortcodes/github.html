@@ -1,0 +1,23 @@
+{{ $repoBranch := .Get "branch" }}
+
+{{ $.Scratch.Set "url" "https://api.github.com/repos/" }}
+{{ $.Scratch.Add "url" (.Get "repo") }}
+{{ $.Scratch.Add "url"  "/contents/" }}
+{{ $.Scratch.Add "url" (.Get "file") }}
+{{ if $repoBranch }}
+  {{ $.Scratch.Add "url" "?ref=" }}
+  {{ $.Scratch.Add "url" $repoBranch }}
+{{ end }}
+
+
+{{ $dataJ := getJSON ($.Scratch.Get "url") }}
+
+
+{{ $con := base64Decode $dataJ.content }}
+
+{{ highlight $con (.Get "lang") (.Get "options") }}
+
+
+<!-- (dict "Authorization" "Bearer abcd") -->
+
+<!--this shortcode is modified from https://github.com/haideralipunjabi/hugo-shortcodes/blob/master/github/github.html-->

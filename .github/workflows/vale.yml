@@ -1,0 +1,17 @@
+name: Linting
+on: [pull_request]
+
+jobs:
+  prose:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4.1.0
+
+      - name: Vale Linter
+        # https://github.com/marketplace/actions/vale-linter
+        uses: errata-ai/vale-action@reviewdog
+        with:
+          # https://github.com/reviewdog/reviewdog#filter-mode
+          filter_mode: added
+

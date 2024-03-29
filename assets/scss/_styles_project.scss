@@ -1,0 +1,11 @@
+/* do not display the site title "Armory Docs" because the logo has "armory" in it */
+.td-navbar .navbar-brand__name {
+  display: none;
+}
+
+.td-page-meta__view { display: none !important; }
+.td-page-meta__edit { display: none !important; }
+.td-page-meta__child { display: none !important; }
+.td-page-meta__issue { display: none !important; }
+.td-page-meta__project-issue { display: none !important; }
+

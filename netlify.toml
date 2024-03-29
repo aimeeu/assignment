@@ -6,7 +6,25 @@ command = "npm run build:preview"
 publish = "public"
 
 [build.environment]
-GO_VERSION = "1.21.4"
+GO_VERSION = "1.21.1"
+HUGO_VERSION = ""
+HUGO_ENV = "production"
 
 [context.production]
 command = "npm run build:production"
+
+
+# https://github.com/netlify-labs/netlify-plugin-sitemap
+[[plugins]]
+package = "@netlify/plugin-sitemap"
+
+  [plugins.inputs]
+  buildDir = "public"
+  # make sure you add a comma after each entry in the exclude list except on the last one
+  exclude =[
+    './public/',
+    './public/concept/',
+    './public/guide/',
+  ]
+  # append missing trailing slash to prettyURL
+  trailingSlash = true
