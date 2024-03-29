@@ -15,40 +15,9 @@ You can find the Action in the [GitHub Action Marketplace](https://github.com/ma
 1. If you are new to using GitHub Actions, see GitHub's [Quickstart for GitHub Actions](https://docs.github.com/en/actions/quickstart) guide for information about setting up GitHub Actions.
 1. You have a CD-as-a-Service credential with the `Deployments Full Access` role.
 1. You have GitHub [secrets](https://docs.github.com/en/actions/security-guides/encrypted-secrets) for the credential's Client ID and Client Secret so you don't expose them in plain text in your GitHub workflow file. You reference these secrets when you configure the CD-as-a-Service GitHub Action.
+1. You have created your deployment config file and merged it into your repo.
 
-## Use the GitHub Action
-
-Configuring the GitHub Action is a multi-part process:
-
-1. [Determine your manifest path](#determine-your-manifest-path)
-1. [Create a deployment file](#create-a-deployment-file)
-1. [Configure the action](#configure-the-action)
-
-### Determine your manifest path
-
-Decide where you are going to store the app manifests you want to deploy to CD-as-a-Service. You need to know this path when you create your deployment file.
-
-Note that the path is relative to where the GitHub Action YAML is stored (`.github/workflows`). For example, if your repo looks like this:
-
-```
-.github
---workflows
----cdaas-deploy-workflow.yaml
-deployments
---deployment.yaml
---manifests
----sample-app.yaml
-```
-
-Then the value you use for `manifests.path` in your `deployment.yaml` would be `/deployments/manifests/sample-app.yaml`.
-
-### Create a deployment file
-
-{{< include "create-k8s-config.md" >}}
-
-Save your deployment file to a directory in your repo. You use this path later when you configure the GitHub Action's `path-to-file` parameter.
-
-### Configure the action
+## Configure the action
 
 In your repo's `.github/workflows` directory, create a file with the following contents:
 
@@ -122,7 +91,7 @@ steps:
 
 See GitHub's [Using workflows](https://docs.github.com/en/actions/using-workflows/reusing-workflows) content for more information.
 
-### Example configuration
+## Example configuration
 
 For this scenario:
 
