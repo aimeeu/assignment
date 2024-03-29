@@ -47,15 +47,17 @@ jobs:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }} # Needed for trigger node on deployment graph; GitHub generates this
         uses: armory/cli-deploy-action@main
         with:
-          clientId: "GITHUB_SECRET_NAME_FOR_CLIENT_ID" 
-          clientSecret:  "GITHUB_SECRET_NAME_FOR_CLIENT_SECRET"
-          path-to-file: "PATH_TO_DEPLOYMENT_FILE"
-          waitForDeployment: true | false
+          clientId: 
+          clientSecret:
+          path-to-file:
+          waitForDeployment:
 ```
 
-* `clientId`: GitHub secret that you created for your CD-as-a-Service Client ID. For example, if you named your secret **CDAAS_CLIENT_ID**, the value for `clientId` would be `"${{ secrets.CDAAS_CLIENT_ID }}"`.
-* `clientSecret`: GitHub secret that you created for your CD-as-a-Service Client ID. For example, if you named your secret **CDAAS_CLIENT_SECRET**, the value for `clientSecret` would be `"${{ secrets.CDAAS_CLIENT_SECRET }}"`.
-* `path-to-file`: Relative path to your deployment file. The path you provide for the `path-to-file` parameter is relative to where your GitHub Action YAML is stored (`.github/workflows`).
+Provide values for the following fields:
+
+* `clientId`: (Required) The name of the GitHub secret that you created for your CD-as-a-Service Client ID. For example, if you named your secret **CDAAS_CLIENT_ID**, the value for `clientId` would be `"${{ secrets.CDAAS_CLIENT_ID }}"`.
+* `clientSecret`: (Required) The name of the GitHub secret that you created for your CD-as-a-Service Client ID. For example, if you named your secret **CDAAS_CLIENT_SECRET**, the value for `clientSecret` would be `"${{ secrets.CDAAS_CLIENT_SECRET }}"`.
+* `path-to-file`: (Required) Relative path to your deployment file. The path you provide for the `path-to-file` parameter is relative to where your GitHub Action YAML is stored (`.github/workflows`).
 
    For example, if your repo looks like this:
 
@@ -69,7 +71,7 @@ jobs:
    ---sample-app.yaml
    ```
 
-   Then `path-to-file` would be `"/deployments/deployment.yaml"`.
+   Then `path-to-file` is `"/deployments/deployment.yaml"`.
 
 * `waitForDeployment`: (Optional); Default: false; this blocks the GitHub Action from completing until the deployment has transitioned to its final state (FAILED, SUCCEEDED, CANCELLED).
 
@@ -79,7 +81,7 @@ The Action prints out the Deployment ID, a link to the Deployments UI, and optio
 * `LINK`: This is the link to the UI, where you can check the state of the workflow and advance it to the next stages if you have manual judgments.
 * `RUN_RESULT`: If you configured 'waitForDeployment=true', this variable contains the final state of the deployment (FAILED, SUCCEEDED, CANCELLED).
 
-You could, as a simplistic example, add a job step that prints out the values of the output parameters:
+You could, for example, add a job step that prints out the values of the output parameters:
 
 ```yaml
 steps:
