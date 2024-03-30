@@ -33,11 +33,11 @@ roles:
         permission: full
 ```
 
-Replace the following: 
+Replace the following:
 
-* _`NAME`_: (Required); String; name of the role.
-* _`TENANT`_: (Optional); String; name of the tenant; if omitted, the role is an organization-wide role, not bound to a specific tenant.
-* _`RESOURCE`_: (Required); String; one of `organization`, `tenant`, or `deployment`.
+* _`NAME`_: (Required) Name of the role.
+* _`TENANT`_: (Optional) Name of the tenant; if omitted, the role is an organization-wide role, not bound to a specific tenant.
+* _`RESOURCE`_: (Required) One of `organization`, `tenant`, or `deployment`.
 
 After you have defined your roles, use the CLI to add those roles to CD-as-a-Service.
 
@@ -94,6 +94,8 @@ Perform the following to update roles:
    armory config apply -f RBAC_CONFIG.yml
    ```
 
+Replace _`RBAC_CONFIG.yml`_ with the name of your config file.
+
 For example, you created the following roles:
 
 ```yaml
@@ -119,7 +121,7 @@ roles:
 
 You notice that the Tester role has no `tenant` defined, which means the role is organization-wide. Update your config file to add the tenant:
 
-{{< highlight yaml "linenos=table, hl_lines=14" >}}
+{{< highlight yaml "linenos=table, hl_lines=15" >}}
 roles:
   - name: Tenant Admin
     tenant: main
@@ -141,7 +143,7 @@ roles:
         permission: full
 {{< /highlight >}}
 
-Execute `armory config apply -f RBAC_CONFIG.yml` to apply your changes.
+Execute `armory config apply -f RBAC_CONFIG.yml` to apply your changes. Replace _`RBAC_CONFIG.yml`_ with the name of your config file.
 
 You can verify that you updated your role correctly by running `armory config get`.
 
@@ -159,6 +161,8 @@ Perform the following to delete a role or roles:
    armory login
    armory config apply -f RBAC_CONFIG.yml
    ```
+   
+   Replace _`RBAC_CONFIG.yml`_ with the name of your config file.
 
 For example, you have a config file with the following roles:
 
@@ -203,10 +207,10 @@ roles:
         permission: full
 ```
 
-Execute `armory config apply -f RBAC_CONFIG.yml` to apply your changes.
+Execute `armory config apply -f RBAC_CONFIG.yml` to apply your changes. Replace _`RBAC_CONFIG.yml`_ with the name of your config file.
 
 You can verify that you deleted your role by running `armory config get`.
 
 When you delete a role, that role is removed from existing users. You can accidentally remove the ability for your users to perform actions within CD-as-a-Service. A user with no role can still log into the UI but only sees a blank **Deployments** screen and receives a 'Principal Not Authorized' error:
 
-{{< figure src="user-no-role.png" >}}
+{{< figure src="user-no-role.png" width="80%" height="80%" >}}

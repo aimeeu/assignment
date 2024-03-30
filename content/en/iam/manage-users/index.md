@@ -10,19 +10,19 @@ exclude_search: true
 
 ## {{% heading "prereq" %}}
 
-1. Create at least one role or your user won't be able to access CD-as-a-Service. See {{< linkWithTitle "iam/manage-rbac-roles.md" >}}.
-1. You need the user's name and email address. Note that the email domain must match your organization's format. For example, users that work for Acme (which uses `username@acme.com`) must have `@acme.com` email addresses. Users are automatically added to your organization once they accept the invite and complete the sign up.
+* If you don't want to assign the `Organization Admin` role to your new user, create a new role. See {{< linkWithTitle "iam/manage-rbac-roles.md" >}}.
+* You need the user's name and email address. The email domain must match your organization's format. For example, users that work for Acme (which uses `username@acme.com`) must have `@acme.com` email addresses. Users are automatically added to your organization once they accept the invite and complete the sign up.
 
 {{% alert title="Important" color="warning" %}}
 
-* **A user can belong to only one CD-as-as-Service Organization (company account)**. If you try to invite a person that already belongs to another org, you get a `409 Conflict: The user already exists` error. 
-* A user can have access to multiple tenants within a single org.
+* **A user can belong to only one CD-as-as-Service Organization (company account)**. If you try to invite a person that already belongs to another organization, you get a `409 Conflict: The user already exists` error.
+* A user can have access to multiple tenants within a single organization.
 
 {{% /alert %}}
 
 ## Invite a user
 
-1. Access the [CD-as-a-Service Console](https://console.cloud.armory.io).
+1. Access the CD-as-a-Service Console.
 1. Navigate to **Access Management** > **Users**.
 1. Click **Invite Users**
 1. Enter the new user's full name in the **Name** field and the user's email address in the **Email** field.
@@ -38,7 +38,7 @@ CD-as-a-Service requires two-factor authentication (2FA) when logging in. When s
 
 ## Assign a role
 
-1. Access the [CD-as-a-Service Console](https://console.cloud.armory.io).
+1. Access the CD-as-a-Service Console.
 1. Navigate to **Access Management** > **Users**.
 1. Find the user you want to update. Click the **pencil icon** to open the **Edit User** screen.
 1. In the **Edit User** screen, place your cursor in the **Roles** field and click.
@@ -47,10 +47,10 @@ CD-as-a-Service requires two-factor authentication (2FA) when logging in. When s
 
 ## Revoke a role
 
-1. Access the [CD-as-a-Service Console](https://console.cloud.armory.io).
+1. Access the CD-as-a-Service Console.
 1. Navigate to **Access Management** > **Users**.
 1. Find the user you want to update. Click the **pencil icon** to open the **Edit User** screen.
 1. In the **Edit User** screen, you can see a user's roles listed below the **Roles** field.
 1. Each assigned role has an **x** next to it. Click the **x** to revoke the role.
 
-{{< figure src="user-role-delete.jpg" alt="User role with arrow pointing at 'x' to delete" >}}
+{{< figure src="user-role-delete.jpg" alt="User role with arrow pointing at 'x' to delete" height="80%" width="80%" >}}
