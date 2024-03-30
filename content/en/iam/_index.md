@@ -1,6 +1,6 @@
 ---
-title: Identity & Access Management
-linkTitle: Identity & Access Management
+title: Identity and access management
+linkTitle: IAM
 description: >
   Access Management using RBAC in Armory CD-as-a-Service.
 weight: 80

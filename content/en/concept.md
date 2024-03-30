@@ -4,16 +4,14 @@ weight: 2
 description: This page shows the concept of RBAC in Armory CD-as-a-Service.
 ---
 
-## RBAC in CD-as-a-Service
+## Role-based access control (RBAC) in CD-as-a-Service
 
-CD-as-a-Service's RBAC implementation provides you with the following features:
+CD-as-a-Service's RBAC implementation provides the following features:
 
-* [System-defined roles](#system-roles) for admins and machine-to-machine credentials.
-* [Custom roles](#custom-role-examples) that you create to fit your company's needs.
-* [SSO groups to custom RBAC roles mapping](#sso-groups-and-rbac-roles).
-* Role-based deployment approval.
+* System roles for admins and machine-to-machine credentials.
+* Custom roles that you create to fit your company's needs.
 
-### RBAC implementation
+## RBAC implementation
 
 ```mermaid
 classDiagram
@@ -36,7 +34,7 @@ classDiagram
     class User {
       +List~Role~ roles
     }
-    class M2MCredential {
+    class ClientCredential {
       +List~Role~ roles
     }
     class Tenant {
@@ -49,66 +47,50 @@ classDiagram
     Role "1" --> "1" Tenant
     Role "1" --> "1" Tenant
     User "1" --> "*" Role
-    M2MCredential "1" --> "*" Role
+    ClientCredential "1" --> "*" Role
 ```
 
-Central to CD-as-a-Service's [RBAC](https://en.wikipedia.org/wiki/Role-based_access_control) implementation is a _Role_, which defines what a user can do within the platform. Each Role has a _Grants_ collection that defines permissions.
+Central to CD-as-a-Service's RBAC implementation is a _Role_, which defines what a user or external app can do within the platform. Each Role has at least one _Grant_ object, which defines permissions.
 
-You define your custom RBAC roles in a YAML file that has this structure:
+## System roles
+
+CD-as-a-Service provides the following system roles:
+
+| Role Name | Grants | Assign To |
+| ---------- | -------- | --------- |
+| Organization Admin | Full access to all features | User |
+| Deployments Full Access | Trigger and manage deployments | User<br/>Client Credential |
+| Remote Network Agent | Access to CD-as-a-Service from your Kubernetes deployment target | Client Credential |
+
+Assign a new user `Organization Admin`, `Deployments Full Access`, or a custom role.
+
+## Custom roles
+
+Define your custom RBAC roles in a YAML file with this structure:
 
 ```yaml
 roles:
   - name: ROLE_NAME
     tenant: TENANT_NAME
     grants:
-      - type: TYPE
+      - type: api
         resource: RESOURCE
-        permission: PERMISSION
+        permission: full
 ```
 
-* `name`: (Required) The name for this role.
-* `tenant`: (Optional) The name of an existing tenant. The role is scoped to the tenant. You can create an organization-wide role by omitting the `tenant` definition.
+* _`ROLE_NAME`_: (Required) The name for this role.
+* _`TENANT_NAME`_: (Optional) The name of an existing tenant. The role is scoped to the tenant. Create an organization-wide role by omitting the `tenant` definition.
+* `grants`: (Required) an array of _Grant_ objects. 
 
-#### Grants
+  * _`RESOURCE`_: (Required) Defines what area the Grant can access:
 
-(Required)
+    * `tenant`: The tenant specified in the `roles.tenant` field. Use `tenant` when you define a [Tenant Admin role](#tenant-admin-role).
+    * `deployment`: Deployments using CLI and the **Deployments** UI. If you omit `roles.tenant`, the role has this Grant across your organization.
+    * `organization`: All features across your entire Organization. Use this when you create an Organization Admin role that maps to an SSO group.
 
-A _Grant_ has type, resource, and permission attributes. 
+## Custom role examples
 
-* `type`: (Required)ingle choice: `api`.
-* `resource`: (Required) Defines what area the Grant can access. It has the following values:
-
-  * `tenant`: When you use `tenant` as the `resource`, the Grant allows access to the tenant that you specify in the `roles.tenant` field. You use `tenant` when you define a [Tenant Admin role](#tenant-admin-role).
-  * `deployment`: This resource allows the role to deploy using the CLI and manage deployments in the **Deployments** UI. If you omit `roles.tenant`, the role has this Grant across your organization.
-  * `organization`: Use this resource when you need to create an Organization Admin role that maps to an SSO group. 
-  
-* `permission`: (Required) The only option is `full`.
-
-#### System roles
-
-CD-as-a-Service provides the following system roles:
-
-* Organization Admin
-  * Grants:
-    * UI - full access to all screens and functionality
-    * CLI -  full authority to execute all CLI commands
-  * Assignment:  
-    * CD-as-a-Service assigns this role to the person who creates a new CD-as-a-Service account (Organization).
-    * You are able to manually assign the Organization Admin role to all users you invite to your Organization, thus bypassing the need to create custom RBAC roles.
-* Deployments Full Access
-  * Grants:
-    * This role grants full authority to trigger deployments.
-  * Assignment:
-    * Assign this role to Client Credentials that you plan to use with CI tools like GitHub Actions.
-* Remote Network Agent
-  * Grants:
-    * This role grants a Remote Network Agent access to CD-as-a-Service.
-  * Assignment:
-    * Assign this role to all Client Credentials you create to use with Remote Network Agents.
-
-### Custom role examples
-
-#### Tenant Admin role
+### Tenant Admin role
 
 This example defines three Tenant Admin roles, one for each tenant. Each role has full authority within the specified tenant.
 
@@ -136,7 +118,7 @@ roles:
 
 If you want to grant a user permission to manage all of your tenants, assign that user the **Organization Admin** role using the UI.
 
-#### Deployment roles
+### Tenant deployment role
 
 This example defines a role that grants permission to use the **Deployments** UI and start deployments using the CLI. The role is bound to the `finance` tenant.
 
@@ -150,7 +132,9 @@ roles:
         permission: full
 ```
 
-This next example defines a role that grants permission to use the **Deployments** UI and start deployments using the CLI across your entire organization. Note that `tenant` is not defined, which makes this an organization-wide role.
+### Organization deployment role
+
+This example defines a role that grants permission to use the **Deployments** UI and start deployments using the CLI across your entire organization. `tenant` is not defined, which makes this an organization-wide role.
 
 ```yaml
 roles:
@@ -163,4 +147,5 @@ roles:
 
 ## {{% heading "nextSteps" %}}
 
-Use the CLI to [add your roles]({{< ref "iam/manage-rbac-roles" >}}) to your CD-as-a-Service organization. You do all subsequent role management with the CLI, but you [assign roles to users]({{< ref "iam/manage-users" >}}) using the UI.
+* [Add custom roles]({{< ref "iam/manage-rbac-roles" >}}) to your CD-as-a-Service organization.
+* [Assign roles to users]({{< ref "iam/manage-users" >}}) using the UI.

@@ -1,5 +1,5 @@
 ---
-title: Invite and Manage Users
+title: Invite and manage users
 linktitle: Users
 description: >
   Use the Armory CD-as-a-Service Console to invite a user to your CD-as-a-Service organization.
@@ -8,13 +8,9 @@ hide_summary: true
 exclude_search: true
 ---
 
-## User accounts overview
-
-For your users to get access to Armory CD-as-a-Service, you must invite them to your organization. This grants them access to the Armory CD-as-a-Service UI. Depending on their permissions, they may have access to different parts of the UI.
-
 ## {{% heading "prereq" %}}
 
-1. You need to create at least one role or your user won't be able to access CD-as-a-Service. See {{< linkWithTitle "iam/manage-rbac-roles.md" >}}.
+1. Create at least one role or your user won't be able to access CD-as-a-Service. See {{< linkWithTitle "iam/manage-rbac-roles.md" >}}.
 1. You need the user's name and email address. Note that the email domain must match your organization's format. For example, users that work for Acme (which uses `username@acme.com`) must have `@acme.com` email addresses. Users are automatically added to your organization once they accept the invite and complete the sign up.
 
 {{% alert title="Important" color="warning" %}}

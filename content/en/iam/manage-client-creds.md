@@ -1,6 +1,6 @@
 ---
-title: Create Client Credentials
-linkTitle: Client Credentials
+title: Create client credentials
+linkTitle: Client credentials
 description: >
   Create machine-to-machine credentials and assign RBAC roles to them in Armory CD-as-a-Service.
 toc_hide: true
@@ -43,5 +43,4 @@ Armory recommends that you store credentials in a secret engine that is supporte
 1. In the **Update** screen, you can see a credential's roles listed below the **Select Roles** field.
 1. Each assigned role has an **x** next to it. Click the **x** to revoke the role.
 
->Make sure your Client Credential has at least one role!
-
+>Make sure your Client Credential has at least one role.

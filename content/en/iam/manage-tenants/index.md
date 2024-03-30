@@ -1,5 +1,5 @@
 ---
-title: Add, Delete, View, and Switch Tenants
+title: Manage tenants
 linkTitle: Tenants
 description: >
   Add tenants to your Armory CD-as-a-Service organization.

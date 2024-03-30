@@ -1,5 +1,5 @@
 ---
-title: Create and Manage RBAC Roles
+title: Create and manage RBAC roles
 linkTitle: RBAC Roles
 description: >
   Create an RBAC role using Armory CD-as-a-Service's CLI.
@@ -21,25 +21,23 @@ By default, a new user has no permission to access features within CD-as-a-Servi
 
 ### How to create a custom role
 
-You define your roles in a YAML file using the following structure:
+Define your roles in a YAML file using the following structure:
 
 ```yaml
 roles:
-  - name:
-    tenant:
+  - name: NAME
+    tenant: TENANT
     grants:
-      - type:
-        resource:
-        permission:
+      - type: api
+        resource: RESOURCE
+        permission: full
 ```
 
-* `name`: (Required); String; name of the role.
-* `tenant`: (Optional); String; name of the tenant; if omitted, the role is an organization-wide role, not bound to a specific tenant.
-* `grants`: (Required)(Dictionary)
+Replace the following: 
 
-  * `type`: (Required); String; `api`.
-  * `resource`: (Required); String; one of `organization`, `tenant`, or `deployment`.
-  * `permission`: (Required); String; `full`.
+* _`NAME`_: (Required); String; name of the role.
+* _`TENANT`_: (Optional); String; name of the tenant; if omitted, the role is an organization-wide role, not bound to a specific tenant.
+* _`RESOURCE`_: (Required); String; one of `organization`, `tenant`, or `deployment`.
 
 After you have defined your roles, use the CLI to add those roles to CD-as-a-Service.
 
@@ -48,15 +46,15 @@ armory login
 armory config apply -f RBAC_CONFIG.yml
 ```
 
-Replace `RBAC_CONFIG.yml` with your YAML config file.
+Replace _`RBAC_CONFIG.yml`_ with your YAML config file.
 
 You can verify that you created your roles correctly by running `armory config get`.
 
 >**Organization Admin** is a system-defined role that does not appear in your RBAC config.
 
-#### User role examples
+### Examples
 
-**Tenant Admin**
+#### Tenant Admin
 
 A user with this role can access every screen in the `main` tenant and deploy apps using the CLI.
 
@@ -70,7 +68,7 @@ roles:
         permission: full
 ```
 
-**Deployer**
+#### Deployer
 
 A user with this role can only access the **Deployments** screen in the UI and deploy apps using the CLI.
 
