@@ -11,7 +11,7 @@ HUGO_VERSION = "0.121.1"
 HUGO_ENV = "production"
 
 [context.production]
-command = "npm run build:production"
+command = "hugo --gc --minify"
 
 
 # https://github.com/netlify-labs/netlify-plugin-sitemap
